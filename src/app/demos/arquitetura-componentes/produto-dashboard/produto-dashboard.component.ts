@@ -1,5 +1,6 @@
+import { ProdutoDetalheComponent } from './../components/produto-card-detalhe.component';
 import { ProdutoCountComponent } from './../components/produto-count.component';
-import { Component, ElementRef, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, AfterViewInit, ViewChildren, QueryList } from '@angular/core';
 import { fromEvent, Observable } from 'rxjs';
 import { Produto } from '../models/produto';
 
@@ -13,6 +14,7 @@ export class ProdutoDashboardComponent implements OnInit, AfterViewInit {
   produtos: Produto[]
   @ViewChild(ProdutoCountComponent, {static: false}) contador: ProdutoCountComponent
   @ViewChild('teste',{static: false}) mensagemTela: ElementRef
+  @ViewChildren(ProdutoDetalheComponent) botoes: QueryList<ProdutoDetalheComponent>
 
   constructor() { }
 
@@ -68,6 +70,11 @@ export class ProdutoDashboardComponent implements OnInit, AfterViewInit {
     clickTexto.subscribe(()=>{
       alert('clicou no texto')
       return
+    })
+
+    console.log('botoes', this.botoes)
+    this.botoes.forEach(p=>{
+      console.log(p.produto)
     })
   }
 
